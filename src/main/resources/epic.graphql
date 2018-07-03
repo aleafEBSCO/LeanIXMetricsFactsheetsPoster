@@ -1,0 +1,56 @@
+{
+  allFactSheets(factSheetType: Project) {
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion 
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+                user {
+                  displayName
+                }
+              }
+            }
+         }
+         qualitySeal
+         tags {
+           tagGroup {
+             name
+           }
+           name
+         }
+         ... on Project {
+           lifecycle {
+             phases {
+               phase
+             }
+           }
+           documents {
+             totalCount
+           }
+           businessValue
+           projectRisk
+           relProjectToBusinessCapability {
+             totalCount
+           }
+           relProjectToProcess {
+             totalCount
+           }
+           relToChild {
+             totalCount
+           }
+           relToParent {
+             totalCount
+           }
+         }
+       }
+     }
+   }
+}
