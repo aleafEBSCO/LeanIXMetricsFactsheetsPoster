@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.leanix.api.GraphqlApi;
 import net.leanix.api.common.ApiClient;
@@ -40,16 +42,18 @@ public class Query {
 		return builder.toString();
 	}
 	
-	public String getData(ApiClient apiClient, String graphQLQuery) {
+	public Map<String, Map<String, Object>> getInfo(ApiClient apiClient, String graphQLQuery) {
 		String query = fileToString(graphQLQuery);
 		GraphqlApi graphqlApi = new GraphqlApi(apiClient);
 		GraphQLRequest request = new GraphQLRequest();
 		request.setQuery(query);
 		GraphQLResult result = new GraphQLResult();
 		
+		Map<String, Map<String, Object>> retData = new LinkedHashMap<String, Map<String, Object>>();
 		//System.out.println("before");
 		try {
 			result = graphqlApi.processGraphQL(request);
+			retData = (LinkedHashMap<String, Map<String, Object>>) result.getData();
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,8 +61,9 @@ public class Query {
 		
 		//System.out.println("after");
 		//return result.toString();
-		
-		return result.getData().toString();
+		System.out.println(result.getData().getClass());
+		//return result.getData().toString();
+		return retData;
 	}
 
 }
