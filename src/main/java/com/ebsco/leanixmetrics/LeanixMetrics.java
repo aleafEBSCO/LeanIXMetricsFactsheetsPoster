@@ -44,42 +44,32 @@ public class LeanixMetrics
     	return apiClient;
     }
     
-    public int getDataCount() {
+    public int getDataCount(String type) {
     	net.leanix.api.common.ApiClient apiClient = QueryClient();
     	
     	Query query = new Query();    	
-		Map<String, Map<String, Object>> data = query.getInfo(apiClient, "/epic.graphql");
+		Map<String, Map<String, Object>> data = query.getInfo(apiClient, "/" + type + ".graphql");
 		System.out.println("Testing what's in the object");
 		
 		
 		List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
 
+		FilterTools ft = new FilterTools(edgeList, type);
 		System.out.println(edgeList.size());
 		
+		int retNum = ft.retFilteredData();
+		
+		return retNum;
+		
+		//System.out.println(edgeList.size());
+		
+		/*
 		for (Map<String, Object> edge : edgeList) {
 		  Map<String, Object> node = (Map<String, Object>) edge.get("node");
 		  System.out.println(node.get("displayName"));
-		}
-		//System.out.println(temp.toString());
+		}*/
 		
-		//Map<String, Map<String, Object>> data = temp.getData();
-		
-		//System.out.println(temp);
-		
-		//String stringJson = temp.toString();
-		//stringJson = stringJson.replaceAll("=", ":");
-		
-		//JsonParser parser = new JsonParser();
-		//JsonObject json = parser.parse(stringJson).getAsJsonObject();
-		
-		
-		
-		//Gson g = new Gson();
-		
-		//JSONObject data = new JSONObject(temp.toString());
-		//System.out.println(data.get("allFactSheets"));
-		
-		return 1;
+		//return 1;
 
     }
     
@@ -88,7 +78,7 @@ public class LeanixMetrics
     	LeanixMetrics lm = new LeanixMetrics();
     	
     	System.out.println("Seems to be working");
-    	System.out.println(lm.getDataCount());
+    	System.out.println(lm.getDataCount("epic"));
     }
     
     
