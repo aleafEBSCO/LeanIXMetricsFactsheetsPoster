@@ -61,7 +61,7 @@ public class Query {
 		
 		//System.out.println("after");
 		//return result.toString();
-		System.out.println(result.getData().getClass());
+		//System.out.println(result.getData().getClass());
 		//return result.getData().toString();
 		return retData;
 	}

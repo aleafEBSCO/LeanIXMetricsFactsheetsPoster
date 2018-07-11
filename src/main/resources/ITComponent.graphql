@@ -1,0 +1,69 @@
+{
+  allFactSheets(factSheetType: ITComponent) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+              user {
+                displayName
+              }
+            }
+          }
+        }
+        qualitySeal
+        tags {
+          tagGroup {
+            name
+          }
+          name
+        }
+        ... on ITComponent {
+          lifecycle {
+            phases {
+              phase
+            }
+          }
+          technicalSuitability
+          technicalSuitabilityDescription
+          relITComponentToProvider {
+            totalCount
+            edges {
+              node {
+                factSheet {
+                  displayName
+                }
+              }
+            }
+          }
+          documents {
+            totalCount
+          }
+          technicalSuitabilityDescription
+          relITComponentToInterface {
+            totalCount
+          }
+          relITComponentToUserGroup {
+            edges {
+              node {
+                usageType
+              }
+            }
+          }
+          relToChild {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

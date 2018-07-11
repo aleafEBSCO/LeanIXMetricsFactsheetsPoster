@@ -1,0 +1,82 @@
+{
+  allFactSheets(factSheetType: Application) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion 
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+                user {
+                  displayName
+                }
+              }
+            }
+         }
+         qualitySeal
+         tags {
+           tagGroup {
+             name
+           }
+           name
+         }
+    	   ... on Application {
+        		lifecycle {
+            phases {
+              phase
+            }
+          }
+          technicalSuitability
+          technicalSuitabilityDescription
+          businessCriticality
+          businessCriticalityDescription
+          functionalSuitability
+          functionalSuitabilityDescription
+          relApplicationToBusinessCapability {
+            totalCount
+          }
+          relApplicationToProcess {
+            totalCount
+          }
+          relApplicationToUserGroup {
+            edges {
+              node {
+                usageType
+              }
+            }
+          }
+          relApplicationToDataObject {
+            totalCount
+          }
+          relProviderApplicationToInterface {
+            totalCount
+          }
+          relApplicationToITComponent {
+            edges {
+              node {
+                factSheet {
+                  ... on ITComponent {
+                    category
+                  }
+                }
+              }
+            }
+          }
+          documents {
+            totalCount
+          }
+           relToChild {
+             totalCount
+           }
+         }
+       }
+     }
+   }
+}

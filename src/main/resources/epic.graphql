@@ -46,9 +46,6 @@
            relToChild {
              totalCount
            }
-           relToParent {
-             totalCount
-           }
          }
        }
      }

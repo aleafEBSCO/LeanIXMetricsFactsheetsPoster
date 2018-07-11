@@ -1,0 +1,44 @@
+{
+  allFactSheets(factSheetType: Interface) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+              user {
+                displayName
+              }
+            }
+          }
+        }
+        qualitySeal
+        tags {
+          tagGroup {
+            name
+          }
+          name
+        }
+        ... on Interface {
+          relInterfaceToProviderApplication {
+            totalCount
+          }
+          relInterfaceToITComponent {
+            totalCount
+          }
+          relToChild {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

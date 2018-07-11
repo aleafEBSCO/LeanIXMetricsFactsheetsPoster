@@ -49,13 +49,13 @@ public class LeanixMetrics
     	
     	Query query = new Query();    	
 		Map<String, Map<String, Object>> data = query.getInfo(apiClient, "/" + type + ".graphql");
-		System.out.println("Testing what's in the object");
+		//System.out.println("Testing what's in the object");
 		
 		
 		List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
 
 		FilterTools ft = new FilterTools(edgeList, type);
-		System.out.println(edgeList.size());
+		//System.out.println(edgeList.size());
 		
 		int retNum = ft.retFilteredData();
 		
@@ -77,8 +77,15 @@ public class LeanixMetrics
     	
     	LeanixMetrics lm = new LeanixMetrics();
     	
-    	System.out.println("Seems to be working");
-    	System.out.println(lm.getDataCount("epic"));
+    	System.out.println("Starting...");
+    	System.out.println(lm.getDataCount("boundedContext") + " problem factsheets");
+    	System.out.println(lm.getDataCount("domain") + " problem factsheets");
+    	System.out.println(lm.getDataCount("dataObject") + " problem factsheets");
+    	System.out.println(lm.getDataCount("ITComponent") + " problem factsheets");
+    	System.out.println(lm.getDataCount("behavior") + " problem factsheets");
+    	//System.out.println(lm.getDataCount("useCase") + " problem factsheets");
+    	System.out.println(lm.getDataCount("epic") + " problem factsheets");
+    	//System.out.println(lm.getDataCount("persona") + " problem factsheets");
     }
     
     

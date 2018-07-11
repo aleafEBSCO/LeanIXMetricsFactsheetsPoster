@@ -1,0 +1,44 @@
+{
+  allFactSheets(factSheetType: BusinessCapability) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+              user {
+                displayName
+              }
+            }
+          }
+        }
+        qualitySeal
+        tags {
+          tagGroup {
+            name
+          }
+          name
+        }
+        ... on BusinessCapability {
+          relBusinessCapabilityToApplication {
+            totalCount
+          }
+          relBusinessCapabilityToProcess {
+            totalCount
+          }
+          relToChild {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}
