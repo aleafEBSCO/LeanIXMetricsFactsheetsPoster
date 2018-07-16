@@ -1,0 +1,38 @@
+{
+  allFactSheets(factSheetType: UserGroup) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+              user {
+                displayName
+              }
+            }
+          }
+        }
+        qualitySeal
+        tags {
+          tagGroup {
+            name
+          }
+          name
+        }
+        ... on UserGroup {
+          relToChild {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

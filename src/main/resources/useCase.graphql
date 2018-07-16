@@ -1,0 +1,52 @@
+{
+  allFactSheets(factSheetType: Process) {
+    totalCount
+    edges {
+      node {
+        type
+        id
+        displayName
+        completion {
+          completion
+          percentage
+        }
+        subscriptions {
+          edges {
+            node {
+              type
+              user {
+                displayName
+              }
+            }
+          }
+        }
+        qualitySeal
+        tags {
+          tagGroup {
+            name
+          }
+          name
+        }
+        ... on Process {
+          lifecycle {
+            phases {
+              phase
+            }
+          }
+          relProcessToBusinessCapability {
+            totalCount
+          }
+          documents {
+            totalCount
+          }
+          relProcessToApplication {
+            totalCount
+          }
+          relToChild {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}
