@@ -268,17 +268,24 @@ public class FilterTools {
 	
 	//count fs with no Business Criticality or no description
 	private void filterBusinessCriticality() {
+		//var to hold num incomplete fs
 		int count = 0;
+		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
+			//get node from each edge
 			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
+			//if business criticalitty is null or description is null/blank
 			if ((node.get("businessCriticality") == null) || (node.get("businessCriticalityDescription") == null)
 					|| (node.get("businessCriticalityDescription").toString().equals(""))) {
+				//add fs to set
 				this.filteredList.add(node.get("id").toString());
+				//incr count
 				count++;
 			}
 		}
+		//let the user know the count
 		System.out.println("\t" + count + " incomplete factsheets from Business Criticality (Description) filter");
 	}
 
@@ -468,7 +475,7 @@ public class FilterTools {
 		System.out.println("\t" + count + " incomplete factsheets from Model Completion Status filter");
 	}
 	
-	//counts fs that have no owner persona or multiple owner persona
+	//counts fs that have no owner persona
 	//zero vs one vs multiple owner persona
 	private void filterOwnerPersona() {
 		//var to hold num incomplete fs
@@ -501,8 +508,8 @@ public class FilterTools {
 				}
 			}
 			
-			//if there's not a single owner
-			if (numOwners != 1) {
+			//if there's no owner
+			if (numOwners == 0) {
 				//add node to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count

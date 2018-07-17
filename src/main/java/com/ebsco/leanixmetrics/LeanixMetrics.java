@@ -21,6 +21,13 @@ public class LeanixMetrics
 	private net.leanix.dropkit.apiclient.ApiClient metricClient;
 	private net.leanix.dropkit.apiclient.ApiClientBuilder metricClientBuilder;
     */
+	private String apiToken = "";
+	private String workspaceID = "";
+	
+	public LeanixMetrics(String at, String wi) {
+		this.apiToken = at;
+		this.workspaceID = wi;
+	}
     
 	//create a Metrics API object to post to leanix metrics
     public PointsApi LeanixMetricsAPI() {
@@ -30,7 +37,7 @@ public class LeanixMetrics
     			//to get oauth2 token
     			.withTokenProviderHost("us.leanix.net")
     			//api token from the workspace you'll be using
-    			.withApiToken("u2KbaBhvfFH9LKYGmTUFRjDLDJuernteFMW3ut6Z")
+    			.withApiToken(this.apiToken)
     			.build();
     	//create the api object and return it
     	PointsApi pointsApi = new PointsApi(apiClient);
@@ -45,14 +52,15 @@ public class LeanixMetrics
     	//General Information
     	//get the current time from UTC. When I tried making it EST, the post request failed
     	OffsetDateTime currentTime= OffsetDateTime.now(ZoneOffset.UTC);
+    	//use OffsetDateTime.parse("2018-03-17T13:21:42.318Z") to use a specific date/time
     	point.setTime(currentTime);
     	System.out.println(currentTime);
     	
     	//Title of the metrics.
-    	point.setMeasurement("Audit Report Metric Tests");
+    	point.setMeasurement("Audit Report Metrics");
     	//workspace id. Should be from same workspace as api token. It can be found in the API tokens tab
     	//in the Admin panel
-    	point.setWorkspaceId("f8897aa0-9602-4217-8d78-714ac1ea7e7d");
+    	point.setWorkspaceId(this.workspaceID);
 
     	//the field will hold the key value pair. The key is the factsheet type and the value is the
     	//number of incomplete factsheets
@@ -97,7 +105,7 @@ public class LeanixMetrics
     			//url to make get request from
     			.withBasePath("https://us.leanix.net/services/pathfinder/v1")
     			//api token from the workspace you will be using
-    			.withApiToken("u2KbaBhvfFH9LKYGmTUFRjDLDJuernteFMW3ut6Z")
+    			.withApiToken(this.apiToken)
     			//leanix server
     			.withTokenProviderHost("us.leanix.net")
     			.build();
@@ -131,8 +139,11 @@ public class LeanixMetrics
     //Main function
     public static void main (String[] args) {
     	
+    	String apiToken = "";
+    	String workspaceID = "";
+    	
     	//create a new LeanixMetricsObject
-    	LeanixMetrics lm = new LeanixMetrics();
+    	LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID);
     	
     	//the process can take a few seconds so let the user know it's starting
     	System.out.println("Starting...");
