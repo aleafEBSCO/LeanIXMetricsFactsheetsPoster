@@ -57,7 +57,7 @@ public class LeanixMetrics
     	System.out.println(currentTime);
     	
     	//Title of the metrics.
-    	point.setMeasurement("Audit Report Metrics");
+    	point.setMeasurement("Audit Report Metric Tests");
     	//workspace id. Should be from same workspace as api token. It can be found in the API tokens tab
     	//in the Admin panel
     	point.setWorkspaceId(this.workspaceID);
@@ -122,49 +122,25 @@ public class LeanixMetrics
     	//send the api client and type of factsheet to query to get a map of factsheet information
 		Map<String, Map<String, Object>> data = query.getInfo(apiClient, "/" + type + ".graphql");
 		
-		//get the list of edges from the map
-		List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
+		try {
+			//get the list of edges from the map
+			List<Map<String, Object>> edgeList = (List<Map<String, Object>>) data.get("allFactSheets").get("edges");
+	
+			//create a new FilterTools object with the list of factsheet nodes and the type
+			FilterTools ft = new FilterTools(edgeList, type);
+			
+			//get the number of incomplete factsheets
+			int retNum = ft.retFilteredData();
 
-		//create a new FilterTools object with the list of factsheet nodes and the type
-		FilterTools ft = new FilterTools(edgeList, type);
-		
-		//get the number of incomplete factsheets
-		int retNum = ft.retFilteredData();
-		
-		//return it
-		return retNum;
+			//return it
+			return retNum;
+		}
+		catch (NullPointerException e) {
+			System.out.println("Error getting factsheets. Likely caused by a wrong/expired API token.");
+			e.printStackTrace();
+			return -1;
+		}
 
-    }
-    
-    //Main function
-    public static void main (String[] args) {
-    	
-    	String apiToken = "";
-    	String workspaceID = "";
-    	
-    	//create a new LeanixMetricsObject
-    	LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID);
-    	
-    	//the process can take a few seconds so let the user know it's starting
-    	System.out.println("Starting...");
-    	
-    	//list of factsheet types, there should be a .graphql file for each type
-    	String[] types = {"boundedContext", "domain", "dataObject", "ITComponent", "behavior",
-    			"useCase", "epic", "persona"};
-    	
-    	//map to hold returned incomplete factsheet numbers
-    	Map<String, Integer> metrics = new HashMap<String, Integer>();
-    	
-    	//for each factsheet type
-    	for (int i = 0; i < types.length; i++) {
-    		//get the number of incomplete factsheets of that type
-    		metrics.put(types[i], lm.getDataCount(types[i]));
-    		//let the user know the number
-    		System.out.println(metrics.get(types[i]) + " problem factsheets of type: " + types[i]);
-    	}
-    	
-    	//push the number of incomplete factsheets to leanix
-    	lm.pushPoint(metrics);
     }
     
 }

@@ -41,11 +41,13 @@ public class Query {
 			reader.close();
 		}
 		//else the file can't be read or found
-		catch(FileNotFoundException e) {
+		catch(NullPointerException e) {
 			System.out.println("Unable to open file '" + filename + "'");
+			return null;
 		}
 		catch(IOException e) {
 			System.out.println("Error reading file '" + filename + "'");
+			return null;
 		}
 		
 		//use the builder to put all the lines into one string and return it

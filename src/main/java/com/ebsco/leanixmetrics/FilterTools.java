@@ -20,6 +20,9 @@ public class FilterTools {
 	//map to hold help convert ebsco type names to leanix type names
 	private Map<String, String> ebscoToLeanix;
 	
+	//count to return value from each filter (Mainly for testing purposes)
+	private int count = 0;
+	
 	//constructor
 	public FilterTools(List<Map<String, Object>> info, String t) {
 		//save the leafnodes from the list of nodes
@@ -42,6 +45,19 @@ public class FilterTools {
 		this.ebscoToLeanix.put("Provider", "Provider");
 		this.ebscoToLeanix.put("Technical Stack", "TechnicalStack");
 		this.ebscoToLeanix.put("Provider Application", "ProviderApplication");
+		
+		this.count = 0;
+	}
+	
+	//return the number of filtered factsheets from the last used filter
+	//mainly for testing purposes
+	public int getCount() {
+		return this.count;
+	}
+	
+	//get the size of the initial list
+	public int getInitialSize() {
+		return this.initialList.size();
 	}
 	
 	//method to figure out which type of filters should be applied to the given type
@@ -142,7 +158,7 @@ public class FilterTools {
 	}
 	
 	//keeps factsheets that don't have children
-	private List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
+	public List<Map<String, Object>> keepLeafNodes(List<Map<String, Object>> info) {
 		//Iterator to go through factsheets (fs)
 		Iterator<Map<String, Object>> it = info.iterator();
 		while (it.hasNext()) {
@@ -163,9 +179,9 @@ public class FilterTools {
 	}
 	
 	//count fs that don't have the given relation
-	private void filterRelation(String relation) {
+	public void filterRelation(String relation) {
 		//var to hold number of incomplete fs
-		int count = 0;
+		this.count = 0;
 		//var to key to find relation
 		String searchKey;
 		//iterate through fs
@@ -183,17 +199,17 @@ public class FilterTools {
 				//add it to the set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//tell the user how many incomplete factsheets from this filter
-		System.out.println("\t" + count + " incomplete factsheets from No Relation to " + relation + " filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from No Relation to " + relation + " filter");
 	}
 	
 	//counts fs that don't have both accountable and responsible
-	private void filterAccountResponse() {
+	public void filterAccountResponse() {
 		//var to hold incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through fs
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -230,17 +246,17 @@ public class FilterTools {
 				//add it to the set
 				this.filteredList.add(node.get("id").toString());
 				//increase count
-				count++;
+				this.count++;
 			}
 		}
 		//let the user know the count
-		System.out.println("\t" + count + " incomplete factsheets from No Accountable or Repsonsible filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from No Accountable or Repsonsible filter");
 	}
 
 	//counts fs that aren't connected to a bounded context or behavior
-	private void filterBoundedContextAndBehavior() {
+	public void filterBoundedContextAndBehavior() {
 		//var to hold num of incomplete fs
-		int count = 0;
+		this.count = 0;
 		
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
@@ -259,17 +275,17 @@ public class FilterTools {
 				//add it to the set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Bounded Context and Behavior filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Bounded Context and Behavior filter");
 	}
 	
 	//count fs with no Business Criticality or no description
-	private void filterBusinessCriticality() {
+	public void filterBusinessCriticality() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -282,17 +298,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let the user know the count
-		System.out.println("\t" + count + " incomplete factsheets from Business Criticality (Description) filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Business Criticality (Description) filter");
 	}
 
 	//counts fs with no owner persona when EIS is the provider
-	private void filterEisProviderOwnerPersona() {
+	public void filterEisProviderOwnerPersona() {
 		//var to hold num of incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through the edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while(it.hasNext()) {
@@ -353,17 +369,17 @@ public class FilterTools {
 				//add to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know num of incomplete fs
-		System.out.println("\t" + count + " incomplete factsheets from EIS Provider Owner filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from EIS Provider Owner filter");
 	}
 	
 	//count fs that don't have a functional fit or description
-	private void filterFunctionalFit() {
+	public void filterFunctionalFit() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -376,17 +392,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Functional Fit (Description) filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Functional Fit (Description) filter");
 	}
 	
-	//count fs that don't have a techincal fit or description
-	private void filterTechnicalFit() {
+	//count fs that don't have a technical fit or description
+	public void filterTechnicalFit() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -399,17 +415,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Technical Fit (Description) filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Technical Fit (Description) filter");
 	}
 
 	//count fs that have a broken quality seal
-	private void filterQualitySeal() {
+	public void filterQualitySeal() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -421,18 +437,18 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Broken Quality Seal filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Broken Quality Seal filter");
 	}
 	
 	//count fs that don't have a model status or have one that isn't ready
 	//Does a factsheet with no model status count or is it only model statuses that aren't ready?
-	private void filterModelStatus() {
+	public void filterModelStatus() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -458,7 +474,7 @@ public class FilterTools {
 						//add the fs to the set
 						this.filteredList.add(node.get("id").toString());
 						//incr count
-						count++;
+						this.count++;
 						break;
 					}
 				}
@@ -468,18 +484,18 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Model Completion Status filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Model Completion Status filter");
 	}
 	
 	//counts fs that have no owner persona
 	//zero vs one vs multiple owner persona
-	private void filterOwnerPersona() {
+	public void filterOwnerPersona() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -513,17 +529,17 @@ public class FilterTools {
 				//add node to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Owner Persona filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Owner Persona filter");
 	}
 
 	//counts fs with a score lower than the given double
-	private void filterScore(double percent) {
+	public void filterScore(double percent) {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -537,24 +553,24 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Percent Complete filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Percent Complete filter");
 	}
 
 	//counts fs with no provided behaviors
-	private void filterProvidedBehaviorRelation() {
+	public void filterProvidedBehaviorRelation() {
 		//var to hold incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
 			//get node from each edge
 			Map<String, Object> edge = it.next();
 			Map<String, Object> node = (Map<String, Object>) edge.get("node");
-			//key to get realtions
+			//key to get relations
 			String searchKey = "relProvider" + node.get("type").toString() + "ToInterface";
 			//get relations using key
 			Map<String, Integer> innerNode = (Map<String, Integer>) node.get(searchKey);
@@ -563,17 +579,17 @@ public class FilterTools {
 				//add node to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Provided Behavior filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Provided Behavior filter");
 	}
 	
 	//count fs with no document links
-	private void filterDocuments() {
+	public void filterDocuments() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -587,17 +603,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from No Documents filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from No Documents filter");
 	}
 	
 	//counts fs with no lifecycle
-	private void filterLifecycle() {
+	public void filterLifecycle() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -609,7 +625,7 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			//else there is a lifecycle
 			}else {
 				//get lifecycle object from node
@@ -621,18 +637,18 @@ public class FilterTools {
 					//add fs to set
 					this.filteredList.add(node.get("id").toString());
 					//incr count
-					count++;
+					this.count++;
 				}
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from No Lifecycle filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from No Lifecycle filter");
 	}
 	
 	//counts fs with no IT component of type software
-	private void filterSoftwareITRelation() {
+	public void filterSoftwareITRelation() {
 		//var to hold num incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -670,17 +686,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from Software IT Component filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from Software IT Component filter");
 	}
 
 	//counts fs with no business value or risk
-	private void filterBusinessValueRisk() {
+	public void filterBusinessValueRisk() {
 		//var to hold incomplete fs
-		int count = 0;
+		this.count = 0;
 		//iterate through edges
 		Iterator<Map<String, Object>> it = this.initialList.iterator();
 		while (it.hasNext()) {
@@ -693,17 +709,17 @@ public class FilterTools {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 			//else if there's no project risk
 			else if (node.get("projectRisk") == null) {
 				//add fs to set
 				this.filteredList.add(node.get("id").toString());
 				//incr count
-				count++;
+				this.count++;
 			}
 		}
 		//let user know count
-		System.out.println("\t" + count + " incomplete factsheets from No Business Value or Risk filter");
+		System.out.println("\t" + this.count + " incomplete factsheets from No Business Value or Risk filter");
 	}
 }
