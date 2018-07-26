@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+
     public static void main (String[] args) {
-    	
     	String apiToken = args[0];
     	String workspaceID = args[1];
     	String measurementName = args[2];
