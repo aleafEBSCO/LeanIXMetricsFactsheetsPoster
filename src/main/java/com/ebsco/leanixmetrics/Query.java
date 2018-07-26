@@ -43,10 +43,12 @@ public class Query {
 		//else the file can't be read or found
 		catch(NullPointerException e) {
 			System.out.println("Unable to open file '" + filename + "'");
+			e.printStackTrace();
 			return null;
 		}
 		catch(IOException e) {
 			System.out.println("Error reading file '" + filename + "'");
+			e.printStackTrace();
 			return null;
 		}
 		

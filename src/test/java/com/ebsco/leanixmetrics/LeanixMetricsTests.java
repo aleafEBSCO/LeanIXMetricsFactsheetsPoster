@@ -18,7 +18,7 @@ public class LeanixMetricsTests {
 	@Test
 	public void getDataCountTest() {
 		//create the object
-		LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID);
+		LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID, "randomName");
 
 		//list of factsheet types, there should be a .graphql file for each type
     	String[] types = {"boundedContext", "domain", "dataObject", "ITComponent", "behavior",
@@ -39,7 +39,7 @@ public class LeanixMetricsTests {
 	@Test
 	public void brokenKeyGetTest() {
 		//object with fake key
-		LeanixMetrics lm = new LeanixMetrics("1234", workspaceID);
+		LeanixMetrics lm = new LeanixMetrics("1234", workspaceID, "randomName");
 		
 		//try to load factsheets
 		int test = lm.getDataCount("domain");
@@ -69,7 +69,7 @@ public class LeanixMetricsTests {
     	metrics.put("businessValueRisk", 13);
     	
     	//create object with fake key
-    	LeanixMetrics lm = new LeanixMetrics("1234", workspaceID);
+    	LeanixMetrics lm = new LeanixMetrics("1234", workspaceID, "randomName");
     	
     	lm.pushPoint(metrics);
     	

@@ -6,11 +6,12 @@ import java.util.Map;
 public class Main {
     public static void main (String[] args) {
     	
-    	String apiToken = "";
-    	String workspaceID = "";
+    	String apiToken = args[0];
+    	String workspaceID = args[1];
+    	String measurementName = args[2];
     	
     	//create a new LeanixMetricsObject
-    	LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID);
+    	LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID, measurementName);
     	
     	//the process can take a few seconds so let the user know it's starting
     	System.out.println("Starting...");
