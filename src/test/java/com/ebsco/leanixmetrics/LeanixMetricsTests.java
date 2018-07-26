@@ -1,6 +1,8 @@
 package com.ebsco.leanixmetrics;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -24,7 +26,7 @@ class LeanixMetricsTests {
 		for (String type : types) {
 			//get the number of incomplete factsheets of that type
 			int numIncomplete = lm.getDataCount(type);
-			assert (numIncomplete > -1);
+			assertTrue(numIncomplete > -1);
 		}
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import net.leanix.api.common.ApiClient;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class QueryTests {
 			}
 
 			//assert that no other types appeared and at least one factsheet was returned
-			assert (onlyType && atLeastOne);
+			assertTrue(onlyType && atLeastOne);
 
 		}
 		

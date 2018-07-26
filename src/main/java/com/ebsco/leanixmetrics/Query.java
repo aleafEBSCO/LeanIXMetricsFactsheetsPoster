@@ -67,7 +67,7 @@ class Query {
 		//set the query of the request with the one gotten from the file
 		request.setQuery(query);
 		//create an result to hold the response
-		GraphQLResult result = new GraphQLResult();
+		GraphQLResult result;
 
 		//map to hold the factsheet data in the response
 		Map<String, Map<String, Object>> retData = new LinkedHashMap<String, Map<String, Object>>();

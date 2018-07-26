@@ -152,7 +152,7 @@ class LeanixMetrics {
 
     //the field will hold the key value pair. The key is the factsheet type and the value is the
     //number of incomplete factsheets
-    Field tempField = new Field();
+    Field tempField;
     for (String key : metrics.keySet()) {
       tempField = new Field();
       //set key to factsheet type
