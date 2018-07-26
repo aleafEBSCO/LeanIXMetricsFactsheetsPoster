@@ -1,43 +1,36 @@
 package com.ebsco.leanixmetrics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.ebsco.leanixmetrics.FilterTools;
-import com.ebsco.leanixmetrics.LeanixMetrics;
-
-public class LeanixMetricsTests {
-	String apiToken = "";
-	String workspaceID = "";
+class LeanixMetricsTests {
+	private String workspaceID = "";
 	
 	//check to make sure a filtertools is returned from LoadFilterFactsheets
 	@Test
-	public void getDataCountTest() {
+	void getDataCountTest() {
 		//create the object
-		LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID, "randomName");
+		String apiToken = "";
+		LeanixMetrics lm = new LeanixMetrics(apiToken, this.workspaceID, "randomName");
 
 		//list of factsheet types, there should be a .graphql file for each type
-    	String[] types = {"boundedContext", "domain", "dataObject", "ITComponent", "behavior",
-    			"useCase", "epic", "persona"};
+		String[] types = {"boundedContext", "domain", "dataObject", "ITComponent", "behavior",
+				"useCase", "epic", "persona"};
     	
-    	//for each factsheet type
-    	for (int i = 0; i < types.length; i++) {
-    		//get the number of incomplete factsheets of that type
-    		int numIncomplete = lm.getDataCount(types[i]);
-    		assert(numIncomplete > -1);
-
-    	}
-	
-		
+		//for each factsheet type
+		for (String type : types) {
+			//get the number of incomplete factsheets of that type
+			int numIncomplete = lm.getDataCount(type);
+			assert (numIncomplete > -1);
+		}
 	}
 	
 	//test to make sure that an error will be thrown when trying to get info with the wrong api key
 	@Test
-	public void brokenKeyGetTest() {
+	void brokenKeyGetTest() {
 		//object with fake key
 		LeanixMetrics lm = new LeanixMetrics("1234", workspaceID, "randomName");
 		
@@ -51,7 +44,7 @@ public class LeanixMetricsTests {
 	
 	//test to make sure an error will be thrown when trying to post info with the wrong api key
 	@Test
-	public void brokenKeyPostTest() {
+	void brokenKeyPostTest() {
 		//fake metrics
 		Map<String, Integer> metrics = new HashMap<String, Integer>();
     	metrics.put("relation", 1);

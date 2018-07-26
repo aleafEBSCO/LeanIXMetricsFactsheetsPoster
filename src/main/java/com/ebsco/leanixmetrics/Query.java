@@ -1,7 +1,6 @@
 package com.ebsco.leanixmetrics;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,11 +15,11 @@ import net.leanix.api.models.GraphQLResult;
 
 
 //class for getting factsheet information from LeanIX
-public class Query {
+class Query {
 	
 	//get the query as a string from a .graphql file
 	//the file has to be streamed in to the information can still be read if project becomes a jar
-	public String fileToString(String filename) {
+	private String fileToString(String filename) {
 		//var to hold each line
 		String line;
 		//builder to put all lines back together
@@ -57,7 +56,7 @@ public class Query {
 	}
 	
 	//method to query leanix and get the factsheet information
-	public Map<String, Map<String, Object>> getInfo(ApiClient apiClient, String graphQLQuery) {
+	Map<String, Map<String, Object>> getInfo(ApiClient apiClient, String graphQLQuery) {
 		//get the query string using the given graphql file name
 		String query = fileToString(graphQLQuery);
 		//create a graphqlapi object with the given api client

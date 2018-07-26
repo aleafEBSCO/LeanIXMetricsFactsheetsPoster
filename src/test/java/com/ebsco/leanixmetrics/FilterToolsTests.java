@@ -1,21 +1,18 @@
 package com.ebsco.leanixmetrics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.ebsco.leanixmetrics.FilterTools;
-
-public class FilterToolsTests {
+class FilterToolsTests {
 
 	//Test to make sure that a node without a child will pass through the filter used upon construction
 	@Test
-	public void noChildrenTest() {
+	void noChildrenTest() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -38,7 +35,7 @@ public class FilterToolsTests {
 	
 	//Test to make sure that a node with a child will not pass through the filter used upon construction
 	@Test
-	public void hasChildrenTest() {
+	void hasChildrenTest() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 1);
@@ -62,7 +59,7 @@ public class FilterToolsTests {
 	
 	//test to for the default constructor and setting the edge list separately with no children
 	@Test
-	public void noChildrenDefaultTest() {		
+	void noChildrenDefaultTest() {
 		//create the edge list with a node with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -85,7 +82,7 @@ public class FilterToolsTests {
 	
 	//test to for the default constructor and setting the edge list separately and there are children
 	@Test
-	public void hasChildrenDefaultTest() {
+	void hasChildrenDefaultTest() {
 		//create the edge list with a node with children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 2);
@@ -108,7 +105,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet without a relation is counted
 	@Test
-	public void noRelation() {
+	void noRelation() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -140,7 +137,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with a relation problem isn't counted
 	@Test
-	public void hasRelation() {
+	void hasRelation() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -172,7 +169,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with no accountable is counted
 	@Test
-	public void noAccountablenoResponsible() {
+	void noAccountablenoResponsible() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -212,7 +209,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with an accountable isn't counted
 	@Test
-	public void hasAccountableNoResponsible() {
+	void hasAccountableNoResponsible() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -252,7 +249,7 @@ public class FilterToolsTests {
 
 	//test to make sure that a factsheet with no responsible is counted
 	@Test
-	public void hasAccountableHasResponsible() {
+	void hasAccountableHasResponsible() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -300,7 +297,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with a responsible isn't counted
 	@Test
-	public void noAccountHasResponsible() {
+	void noAccountHasResponsible() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -340,7 +337,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet without a relation is counted
 	@Test
-	public void noBoundedContextOrNoBehavior() {
+	void noBoundedContextOrNoBehavior() {
 		//test no bounded context but has behavior
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -413,7 +410,7 @@ public class FilterToolsTests {
 	
 	//test to make sure no bounded context and no behavior is counted
 	@Test
-	public void NoBoundedContextAndNoBehaviorTest() {
+	void NoBoundedContextAndNoBehaviorTest() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -450,7 +447,7 @@ public class FilterToolsTests {
 	
 	//test to make sure No Business Criticality Or No Description is counted
 	@Test
-	public void NoBusinessCriticalityOrNoDescription() {
+	void NoBusinessCriticalityOrNoDescription() {
 		//test when has business criticality but no description
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -512,7 +509,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there are criticality and description, it isn't counted
 	@Test
-	public void hasBusinessCriticalityAndDescription() {
+	void hasBusinessCriticalityAndDescription() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -543,7 +540,7 @@ public class FilterToolsTests {
 
 	//make sure that when eis is provider and there are no owners, it's counted
 	@Test
-	public void EisProviderNoOwner() {
+	void EisProviderNoOwner() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -590,7 +587,7 @@ public class FilterToolsTests {
 		//the constructor will run the filter. Domain is used as a random type. The type doesn't matter
 		//in this test case but will in others
 		FilterTools ft = new FilterTools(send, "domain");
-		ft.filterEisProviderOwnerPersona();;
+		ft.filterEisProviderOwnerPersona();
 		
 		//there should be a problem factsheet since eis is provider and there's no owner
 		assertEquals(1, ft.getCount());
@@ -598,7 +595,7 @@ public class FilterToolsTests {
 	
 	//make sure that when eis is provider and there are owners, it's not counted
 	@Test
-	public void EisProviderAndOwner() {
+	void EisProviderAndOwner() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -645,7 +642,7 @@ public class FilterToolsTests {
 		//the constructor will run the filter. Domain is used as a random type. The type doesn't matter
 		//in this test case but will in others
 		FilterTools ft = new FilterTools(send, "domain");
-		ft.filterEisProviderOwnerPersona();;
+		ft.filterEisProviderOwnerPersona();
 		
 		//there should not be a problem factsheet since eis is provider and there's an owner
 		assertEquals(0, ft.getCount());
@@ -653,7 +650,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there's no owner and no eis provider, it isn't counted
 	@Test
-	public void NoEisProviderNoOwner() {
+	void NoEisProviderNoOwner() {
 	//make the "factsheet" with no children
 	Map<String, Integer> relToChild = new HashMap<String, Integer>();
 	relToChild.put("totalCount", 0);
@@ -700,7 +697,7 @@ public class FilterToolsTests {
 	//the constructor will run the filter. Domain is used as a random type. The type doesn't matter
 	//in this test case but will in others
 	FilterTools ft = new FilterTools(send, "domain");
-	ft.filterEisProviderOwnerPersona();;
+	ft.filterEisProviderOwnerPersona();
 	
 	//there shouldn't be a problem factsheet since eis isn't owner
 	assertEquals(0, ft.getCount());
@@ -708,7 +705,7 @@ public class FilterToolsTests {
 
 	//test to make sure No functional fit Or No Description is counted
 	@Test
-	public void NoFunctionalFitOrNoDescription() {
+	void NoFunctionalFitOrNoDescription() {
 		//test when has functional fit but no description
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -770,7 +767,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there are functional fit and description, it isn't counted
 	@Test
-	public void hasFunctionalFitAndDescription() {
+	void hasFunctionalFitAndDescription() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -801,7 +798,7 @@ public class FilterToolsTests {
 
 	//test to make sure No technical fit Or No Description is counted
 	@Test
-	public void noTechnicalFitOrNoDescription() {
+	void noTechnicalFitOrNoDescription() {
 		//test when has functional fit but no description
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -863,7 +860,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there are functional fit and description, it isn't counted
 	@Test
-	public void hasTechnicalFitAndDescription() {
+	void hasTechnicalFitAndDescription() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -894,7 +891,7 @@ public class FilterToolsTests {
 
 	//make sure that when the quality seal is broken, it's counted
 	@Test
-	public void brokenQualitySeal() {
+	void brokenQualitySeal() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -916,7 +913,7 @@ public class FilterToolsTests {
 		//the constructor will run the filter. Domain is used as a random type. The type doesn't matter
 		//in this test case but will in others
 		FilterTools ft = new FilterTools(send, "domain");
-		ft.filterQualitySeal();;
+		ft.filterQualitySeal();
 		
 		//there should be a problem factsheet
 		assertEquals(1, ft.getCount());
@@ -924,7 +921,7 @@ public class FilterToolsTests {
 	
 	//make sure that when the quality seal isn't broken, it's not counted
 	@Test
-	public void approvedQualitySeal() {
+	void approvedQualitySeal() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -954,7 +951,7 @@ public class FilterToolsTests {
 	
 	//make sure that when the there's no model status, it's counted
 	@Test
-	public void noModelStatus() {
+	void noModelStatus() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -995,7 +992,7 @@ public class FilterToolsTests {
 	
 	//make sure that when the the model status isn't ready, it's counted
 	@Test
-	public void notReadyModelStatus() {
+	void notReadyModelStatus() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1036,7 +1033,7 @@ public class FilterToolsTests {
 	
 	//make sure that when the the model status is ready, it's not counted
 	@Test
-	public void readyModelStatus() {
+	void readyModelStatus() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1077,7 +1074,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there's no owner, it's counted
 	@Test
-	public void noOwnerPersona() {
+	void noOwnerPersona() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1118,7 +1115,7 @@ public class FilterToolsTests {
 	
 	//make sure that when there's an owner, it's not counted
 	@Test
-	public void hasOwnerPersona() {
+	void hasOwnerPersona() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1159,7 +1156,7 @@ public class FilterToolsTests {
 	
 	//make sure that a lower scored factsheet is counted
 	@Test
-	public void lowerScore() {
+	void lowerScore() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1192,7 +1189,7 @@ public class FilterToolsTests {
 	
 	//make sure that a equal scored factsheet isn't counted
 	@Test
-	public void equalScore() {
+	void equalScore() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1225,7 +1222,7 @@ public class FilterToolsTests {
 	
 	//make sure that a greater scored factsheet isn't counted
 	@Test
-	public void greaterScore() {
+	void greaterScore() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1258,7 +1255,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet without a provided behavior is counted
 	@Test
-	public void noProvidedBehaviorsRelation() {
+	void noProvidedBehaviorsRelation() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1290,7 +1287,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with a provided behavior isn't counted
 	@Test
-	public void hasProvidedBehaviorsRelation() {
+	void hasProvidedBehaviorsRelation() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1322,7 +1319,7 @@ public class FilterToolsTests {
 		
 	//test to make sure that a factsheet without documents is counted
 	@Test
-	public void noDocuments() {
+	void noDocuments() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1354,7 +1351,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with a document isn't counted
 	@Test
-	public void hasDocument() {
+	void hasDocument() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1386,7 +1383,7 @@ public class FilterToolsTests {
 		
 	//test to make sure that a factsheet with no lifecycle is counted
 	@Test
-	public void noLifecycle() {
+	void noLifecycle() {
 		//no phases
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -1454,7 +1451,7 @@ public class FilterToolsTests {
 
 	//test to make sure that a factsheet with a lifecycle isn't counted
 	@Test
-	public void hasLifecycle() {
+	void hasLifecycle() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1490,7 +1487,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet without a software it component is counted
 	@Test
-	public void noSoftwareITComponent() {
+	void noSoftwareITComponent() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1531,7 +1528,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with a software it component isn't counted
 	@Test
-	public void hasSoftwareITComponent() {
+	void hasSoftwareITComponent() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1572,7 +1569,7 @@ public class FilterToolsTests {
 	
 	//test to make sure No business value or risk is counted
 	@Test
-	public void NoBusinessValueOrRisk() {
+	void NoBusinessValueOrRisk() {
 		//test when has business value but no risk
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
@@ -1634,7 +1631,7 @@ public class FilterToolsTests {
 	
 	//test to make sure has business value and risk isn't counted
 	@Test
-	public void hasBusinessValueAndRisk() {
+	void hasBusinessValueAndRisk() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);
@@ -1665,7 +1662,7 @@ public class FilterToolsTests {
 	
 	//test to make sure that a factsheet with two problems is only counted once
 	@Test
-	public void multipleProblemsTest() {
+	void multipleProblemsTest() {
 		//make the "factsheet" with no children
 		Map<String, Integer> relToChild = new HashMap<String, Integer>();
 		relToChild.put("totalCount", 0);

@@ -24,16 +24,16 @@ public class Main {
     	Map<String, Integer> metrics = new HashMap<String, Integer>();
     	
     	//for each factsheet type
-    	for (int i = 0; i < types.length; i++) {
-    		//get the number of incomplete factsheets of that type
-    		metrics.put(types[i], lm.getDataCount(types[i]));
-    		//let the user know the number
-    		System.out.println(metrics.get(types[i]) + " problem factsheets of type: " + types[i]);
-    		if (metrics.get(types[i]) == -1) {
-    			System.out.println("Error getting factsheet data");
-    			return;
-    		}
-    	}
+			for (String type : types) {
+				//get the number of incomplete factsheets of that type
+				metrics.put(type, lm.getDataCount(type));
+				//let the user know the number
+				System.out.println(metrics.get(type) + " problem factsheets of type: " + type);
+				if (metrics.get(type) == -1) {
+					System.out.println("Error getting factsheet data");
+					return;
+				}
+			}
     	
     	//push the number of incomplete factsheets to leanix
     	lm.pushPoint(metrics);
