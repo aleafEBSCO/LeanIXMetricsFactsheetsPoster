@@ -65,7 +65,7 @@ class FilterTools {
 		//let the user know filtering has begun
 		System.out.println(type + " filtering");
 		//Bounded Context/Application filtering
-		if ("boundedContext".equals(this.type)) {
+		if (this.type.equals("boundedContext")) {
 			filterLifecycle();
 			filterBusinessCriticality();
 			filterFunctionalFit();
@@ -83,7 +83,7 @@ class FilterTools {
 			filterScore(.7);
 		}
 		//domain/BusinessCapability filtering
-		else if ("domain".equals(this.type)) {
+		else if (this.type.equals("domain")) {
 			filterRelation("Bounded Context");
 			filterRelation("Use Case");
 			filterAccountResponse();
@@ -92,7 +92,7 @@ class FilterTools {
 			filterScore(.6);
 		}
 		//Data Object filtering
-		else if ("dataObject".equals(this.type)) {
+		else if (this.type.equals("dataObject")) {
 			filterBoundedContextAndBehavior();
 			filterAccountResponse();
 			filterQualitySeal();
@@ -100,7 +100,7 @@ class FilterTools {
 			filterScore(.5);
 		}
 		//IT Component filtering
-		else if ("ITComponent".equals(this.type)) {
+		else if (this.type.equals("ITComponent")) {
 			filterRelation("Provider");
 			filterDocuments();
 			filterLifecycle();
@@ -114,7 +114,7 @@ class FilterTools {
 			filterScore(.7);
 		}
 		//Behavior/Interface filtering
-		else if ("behavior".equals(this.type)) {
+		else if (this.type.equals("behavior")) {
 			filterRelation("Provider Application");
 			filterRelation("IT Component");
 			filterAccountResponse();
@@ -123,7 +123,7 @@ class FilterTools {
 			filterScore(.6);
 		}
 		//Use Case/Process filtering
-		else if ("useCase".equals(this.type)) {
+		else if (this.type.equals("useCase")) {
 			filterRelation("Domain");
 			filterDocuments();
 			filterLifecycle();
@@ -134,7 +134,7 @@ class FilterTools {
 			filterScore(.60);
 		}
 		//Epic/Project filtering
-		else if ("epic".equals(this.type)) {
+		else if (this.type.equals("epic")) {
 			filterDocuments();
 			filterLifecycle();
 			filterBusinessValueRisk();
@@ -146,7 +146,7 @@ class FilterTools {
 			filterScore(.5);
 		}
 		//Persona/userGroup filtering
-		else if ("persona".equals(this.type)) {
+		else if (this.type.equals("persona")) {
 			filterAccountResponse();
 			filterQualitySeal();
 			filterModelStatus();

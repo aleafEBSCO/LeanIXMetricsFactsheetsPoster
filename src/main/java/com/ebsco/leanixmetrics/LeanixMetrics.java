@@ -65,7 +65,7 @@ class LeanixMetrics {
   }
 
   //check all the measurements already in leanix to make sure you don't post twice in one day
-  private boolean pointAlreadyExists(OffsetDateTime time) {
+  boolean pointAlreadyExists(OffsetDateTime time) {
     //get the series api
     SeriesApi seriesApi = LeanixMetricsSeriesAPI();
 
