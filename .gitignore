@@ -3,3 +3,8 @@
 target/
 .project
 secrets.txt
+.idea
+*.iml
+out/
+META-INF/
+TestsArguments.txt

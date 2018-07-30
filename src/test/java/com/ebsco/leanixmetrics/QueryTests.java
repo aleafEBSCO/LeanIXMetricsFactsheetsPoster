@@ -1,5 +1,6 @@
 package com.ebsco.leanixmetrics;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,34 @@ class QueryTests {
 	private String[] types = {"boundedContext", "domain", "dataObject", "ITComponent", "behavior",
 			"useCase", "epic", "persona"};
 	private Map<String, String> ebscoToLeanix = new HashMap<String, String>();
-	
+
+	QueryTests() {
+        //file input stream
+        InputStream in = getClass().getResourceAsStream("/TestsArguments.txt");
+
+        //try to read the file
+        try {
+            //reader for the input stream
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+            //add each line to the string builder
+            this.apiToken = reader.readLine();
+            this.workspaceID = reader.readLine();
+
+            //close the file
+            reader.close();
+        }
+        //else the file can't be read or found
+        catch(NullPointerException e) {
+            System.out.println("Unable to open file 'TestsArguments.txt'");
+            e.printStackTrace();
+        }
+        catch(IOException e) {
+            System.out.println("Error reading file 'TestsArguments.txt'");
+            e.printStackTrace();
+        }
+	}
+
 	@Test
 	void typeTest() {
 		
