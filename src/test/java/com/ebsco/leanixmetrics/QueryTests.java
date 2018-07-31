@@ -46,6 +46,7 @@ class QueryTests {
         }
 	}
 
+	//Test to make sure that on only factsheets of the given type are returned and that at least one factsheet is returned when Query is used
 	@Test
 	void typeTest() {
 		
@@ -58,7 +59,9 @@ class QueryTests {
 		ebscoToLeanix.put("dataObject", "DataObject");
 		ebscoToLeanix.put("ITComponent", "ITComponent");
 
+		//go through all the types
 		for (String type1 : types) {
+			//use Leanix Metrics to get an api client
 			LeanixMetrics lm = new LeanixMetrics(apiToken, workspaceID, "randomName");
 			ApiClient apiClient = lm.QueryClient();
 
